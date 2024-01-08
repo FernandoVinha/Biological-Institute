@@ -1,0 +1,203 @@
+/* Estilos para a barra de navegação */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px; /* Espaçamento interno da barra de navegação */
+    position: relative; /* Adicione essa propriedade para empilhar corretamente os elementos */
+}
+
+/* Estilos para a div à esquerda */
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para os links "Home" e "Exchange" na div à esquerda */
+.left-section a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-right: 20px; /* Espaçamento entre os links */
+    position: relative; /* Adicione uma posição relativa para os links */
+}
+
+/* Estilos para a animação da barra sob os links */
+.left-section a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px; /* Altura da barra */
+    background-color: white; /* Cor da barra */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.5s ease-in-out; /* Adicione uma transição suave na largura */
+}
+
+/* Estilos para a animação da barra quando o usuário passa o mouse sobre os links */
+.left-section a:hover::after {
+    width: 100%; /* Aumenta a largura da barra para 100% */
+}
+/* Estilos para a div do centro */
+.center-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adicione uma margem superior de 10px */
+}
+
+
+/* Estilos para a div à direita */
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para os botões de registro e login na div à direita */
+.right-section .register,
+.right-section .login {
+    background: transparent;
+    border: 3px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 700;
+    margin-left: 20px;
+    padding: 5px 10px; /* Adicione um preenchimento para espaçamento interno */
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Estilos para a animação dos botões quando o usuário passa o mouse sobre eles */
+.right-section .register:hover,
+.right-section .login:hover {
+    background-color: #fff; /* Altera o fundo para branco */
+    color: #000; /* Altera a cor do texto para preto */
+    transform: scale(1.05); /* Aplica um leve aumento de escala no botão */
+}
+
+
+/* Estilos para o link do theme-switcher dentro da classe "active" */
+.navbar.active .center-section .theme-switcher-container {
+    margin-top: 10px; /* Margem superior quando a barra de navegação está ativa */
+}
+
+/* Estilos para a div branca do botão de alternância */
+.toggle-container {
+    display: none;
+    background-color: transparent; /* Cor de fundo transparente */
+    width: 50px; /* Largura da div branca */
+    height: 50px; /* Altura da div branca */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 10px; /* Ajuste a distância do topo conforme necessário */
+    left: 10px; /* Ajuste a distância da esquerda conforme necessário */
+    z-index: 999; /* Certifique-se de que a div branca fique acima de outros elementos */
+    cursor: pointer;
+    flex-direction: column;
+}
+
+/* Estilos para as barras dentro da div branca */
+.toggle-container .bar {
+    display: none;
+    background-color: white; /* Cor das barras */
+    width: 80%; /* Largura das barras */
+    height: 5px; /* Altura das barras */
+    display: block; /* Exibir as barras uma acima da outra */
+    margin-bottom: 5px; /* Espaçamento de 5 pixels entre as barras */
+    border-radius: 2.5px; /* Arredonda as bordas das barras pela metade da altura */
+    z-index: 99; /* Certifique-se de que a div branca fique acima de outros elementos */
+}
+/* Mídia query para telas com largura menor que 490px */
+@media (max-width: 490px) {
+    /* Coloca os elementos um abaixo do outro */
+/* Estilos para a barra de navegação */
+    .navbar {
+        /* Estilos padrão do navbar aqui */
+        flex-direction: column;
+        align-items: center; /* Centraliza verticalmente */
+        width: 100%; /* Expande para a largura total */
+        padding: 20px; /* Espaçamento interno maior quando ativo */
+        margin-left: 0; /* Remove a margem esquerda */
+        margin-right: 0; /* Remove a margem direita */
+        background-color: rgba(255, 254, 254, 0.329); /* Cor de fundo semi-transparente */
+        transition: transform 1s ease-in-out; /* Adicione uma transição de transformação */
+        transform: translateY(-100%); /* Começa oculto acima da tela */
+        z-index: 90; /* Certifique-se de que a div branca fique acima de outros elementos */
+    }
+
+    .navbar.active {
+        display: flex;
+        transform: translateY(0); /* Move o navbar para baixo da tela */
+    }
+
+    .toggle-container {
+    display: flex;
+    }
+
+        /* Estilos para as barras quando a navbar está ativa */
+    .toggle-container.active .bar:nth-child(2) {
+        transform: scaleX(0); /* Torna a barra do meio invisível */
+        transition: transform 0.5s ease-in-out; /* Adicione uma transição de transformação */
+    }
+
+    .toggle-container.active .bar:nth-child(1) {
+        transform: translateY(10px) rotate(45deg); /* Gira e move a primeira barra para a diagonal superior direita e centraliza verticalmente */
+        transition: transform 1.5s ease-in-out; /* Adicione uma transição de transformação */
+    }
+    
+    .toggle-container.active .bar:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg); /* Gira e move a terceira barra para a diagonal superior esquerda e centraliza verticalmente */
+        transition: transform 1.5s ease-in-out; /* Adicione uma transição de transformação */
+    }
+
+    /* Estilos para as barras quando a navbar não está ativa */
+.toggle-container .bar:nth-child(2) {
+    transform: scaleX(1); /* Retorna a barra do meio à sua largura total */
+    transition: transform 0.5s ease-in-out; /* Adicione uma transição de transformação */
+}
+
+.toggle-container .bar:nth-child(1) {
+    transform: translateY(0) rotate(0deg); /* Retorna a primeira barra à posição inicial */
+    transition: transform 1.5s ease-in-out; /* Adicione uma transição de transformação */
+}
+
+.toggle-container .bar:nth-child(3) {
+    transform: translateY(0) rotate(0deg); /* Retorna a terceira barra à posição inicial */
+    transition: transform 1.5s ease-in-out; /* Adicione uma transição de transformação */
+}
+
+
+    .right-section, .left-section {
+        flex-direction: column; /* Empilhar elementos verticalmente */
+        align-items: center; /* Centraliza verticalmente */
+        margin-left: 0; /* Remove a margem esquerda */
+        margin-right: 0; /* Remove a margem direita */
+        margin-top: 20px; /* Margem superior quando a barra de navegação está ativa */
+    }
+    /* Estilos para os links "Home" e "Exchange" quando a tela é menor */
+    .left-section a {
+        align-items: center; /* Centraliza verticalmente */
+        margin-left: 0; /* Remove a margem esquerda */
+        margin-right: 0; /* Remove a margem direita */
+        margin-top: 20px; /* Margem superior quando a barra de navegação está ativa */
+    }
+    /* Estilos para os botões de registro e login quando a tela é menor */
+    .right-section .register,
+    .right-section .login {
+        margin-left: 0; /* Remove a margem esquerda */
+        margin-right: 0; /* Remove a margem direita */
+        margin-top: 20px; /* Margem superior quando a barra de navegação está ativa */
+    }
+    
+    /* Exibir o botão de alternância quando a tela for menor que 490px */
+    .toggle-button {
+        display: flex;
+    }
+}
+
+

@@ -1,0 +1,99 @@
+{% load static %}
+
+<link href="{% static 'css/items/login.css' %}" rel="stylesheet">
+
+
+<div class="modal_login" id="upper-section">
+    <input type="checkbox" name="setingModal" id="login_check">
+    <div class="header">
+        <img src="{% static 'img/satoshi.png' %}" alt="">
+      <img src="{% static 'img/btc.png' %}" alt="">
+      <img src="{% static 'img/Lightning.png' %}" alt="">
+      <button class="login2">x</button>
+    </div>
+    <div class="content">
+
+        <div class="login_email active">
+                <h2>Login by Email</h2>
+                <form action="{% url 'login_email' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-box"> 
+                        <span class="icon">
+                            <ion-icon name="mail"></ion-icon>
+                        </span>
+                        <input type="email" id="username" name="username" required>
+                        <label for="username">E-mail:</label>
+                    </div>
+                    <div class="input-box"> 
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password1" id="password1" name="password1" required>
+                        <label for="password1">Senha:</label>
+                    </div>
+
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <button type="submit" class="login-token-button">Login Anonymously</button>
+            </div>
+
+            <div class="login_token">
+                <form action="{% url 'login_token' %}" method="post">
+                    <h2>Login Anonymously</h2>
+                    {% csrf_token %}
+                    <div class="input-box"> 
+                        <span class="icon">
+                            <ion-icon name="key"></ion-icon>
+                        </span>
+                        <input id="username" name="token" required>
+                        <label for="username">Token:</label>
+                    </div>
+                    <div class="input-box"> 
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password1" id="password1" name="password1" required>
+                        <label for="password1">Senha:</label>
+                    </div>
+
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <button type="submit" class="login-email-button">Login by Email</button>
+            </div>
+        </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<!-- Scripts relacionados aos botões "Login Token" e "Login Email" -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginTokenButton = document.querySelector('.login-token-button');
+        const loginEmailButton = document.querySelector('.login-email-button');
+        const loginTokenForm = document.querySelector('.login_token');
+        const loginEmailForm = document.querySelector('.login_email');
+
+        // Função para mostrar o formulário "login_token" e ocultar "login_email"
+        function showLoginTokenForm() {
+            loginTokenForm.style.display = 'block';
+            loginEmailForm.style.display = 'none';
+        }
+
+        // Função para mostrar o formulário "login_email" e ocultar "login_token"
+        function showLoginEmailForm() {
+            loginEmailForm.style.display = 'block';
+            loginTokenForm.style.display = 'none';
+        }
+
+        // Adicionar um ouvinte de evento de clique ao botão "Login Token"
+        loginTokenButton.addEventListener('click', showLoginTokenForm);
+
+        // Adicionar um ouvinte de evento de clique ao botão "Login Email"
+        loginEmailButton.addEventListener('click', showLoginEmailForm);
+    });
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

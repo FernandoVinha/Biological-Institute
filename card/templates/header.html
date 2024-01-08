@@ -1,0 +1,114 @@
+{% load static %}
+<link href="{% static 'css/header.css' %}" rel="stylesheet">
+
+
+<nav class="navbar">
+  <div class="left-section">
+      <a href="#">Home</a>
+      <a href="#">Exchange</a>
+  </div>
+  <div class="center-section">
+      {% include "items/theme-switcher.html" %}
+  </div>
+  <div class="right-section">
+      <button class="register">Register</button>
+      <button class="login">Login</button>
+  </div>
+</nav>
+
+<div class="toggle-container">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</div>
+
+  {% include "items/register.html" %}
+  {% include "items/login.html" %}
+<script> 
+  // Seletor para o botão de alternância
+  const toggleButton = document.querySelector(".toggle-container");
+
+  // Seletor para a navbar
+  const navbar = document.querySelector(".navbar");
+
+  // Adicione um ouvinte de evento de clique ao botão de alternância
+  toggleButton.addEventListener("click", () => {
+      // Alternar a classe .active na navbar
+      navbar.classList.toggle("active");
+      // Também alternar a classe .active na toggle-container
+      toggleButton.classList.toggle("active");
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  const modalRegisterCheckbox = document.getElementById('register_check');
+  const modalLoginCheckbox = document.getElementById('login_check');
+  const modalRegister = document.querySelector('.modal_register');
+  const modalLogin = document.querySelector('.modal_login');
+  const registerButtons = document.querySelectorAll('.register, .register2');
+  const loginButtons = document.querySelectorAll('.login, .login2');
+
+  // Função para abrir o modal de registro
+  function openRegisterModal() {
+    modalRegisterCheckbox.checked = true;
+    modalRegister.classList.add('active');
+    modalLoginCheckbox.checked = false; // Feche o modal de login
+    modalLogin.classList.remove('active');
+  }
+
+  // Função para fechar o modal de registro
+  function closeRegisterModal() {
+    modalRegisterCheckbox.checked = false;
+    modalRegister.classList.remove('active');
+  }
+
+  // Função para abrir o modal de login
+  function openLoginModal() {
+    modalLoginCheckbox.checked = true;
+    modalLogin.classList.add('active');
+    modalRegisterCheckbox.checked = false; // Feche o modal de registro
+    modalRegister.classList.remove('active');
+  }
+
+  // Função para fechar o modal de login
+  function closeLoginModal() {
+    modalLoginCheckbox.checked = false;
+    modalLogin.classList.remove('active');
+  }
+
+  // Adicionar eventos de clique aos botões de registro
+  registerButtons.forEach(function(button) {
+    button.addEventListener('click', openRegisterModal);
+  });
+
+  // Adicionar eventos de clique aos botões de login
+  loginButtons.forEach(function(button) {
+    button.addEventListener('click', openLoginModal);
+  });
+
+  // Adicionar eventos de clique aos botões "x" nos modais de registro e login
+  document.querySelectorAll('.register2').forEach(function(button) {
+    button.addEventListener('click', closeRegisterModal);
+  });
+
+  document.querySelectorAll('.login2').forEach(function(button) {
+    button.addEventListener('click', closeLoginModal);
+  });
+
+  // Eventos de alteração dos checkboxes (opcional, dependendo do seu design)
+  modalRegisterCheckbox.addEventListener('change', function() {
+    if (!modalRegisterCheckbox.checked) {
+      closeRegisterModal();
+    }
+  });
+
+  modalLoginCheckbox.addEventListener('change', function() {
+    if (!modalLoginCheckbox.checked) {
+      closeLoginModal();
+    }
+  });
+});
+
+
+
+  
+</script>

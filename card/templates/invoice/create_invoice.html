@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Invoice</title>
+    <!-- Inclua aqui links para CSS ou JavaScript se necessário -->
+</head>
+<body>
+    <h1>Criar Invoice</h1>
+
+    <!-- Exibe mensagens de erro de validação do formulário -->
+    {% if form.errors %}
+        <p style="color: red;">Por favor, corrija os erros abaixo.</p>
+    {% endif %}
+
+    <!-- Formulário para criar uma nova invoice -->
+    <form method="post">
+        {% csrf_token %} <!-- Token CSRF para segurança -->
+        {{ form.as_p }}  <!-- Renderiza os campos do formulário -->
+        <button type="submit">Criar Invoice</button>
+    </form>
+
+
+</body>
+</html>

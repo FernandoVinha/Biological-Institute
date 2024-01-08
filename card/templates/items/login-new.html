@@ -1,0 +1,93 @@
+{% load static %}
+
+<div class="modal_login">
+    <input type="checkbox" name="setingModal" id="login_check">
+    <div class="header">
+      <img src="{% static 'img/satoshi.png' %}" alt="">
+      <img src="{% static 'img/btc.png' %}" alt="">
+      <img src="{% static 'img/Lightning.png' %}" alt="">
+    </div>
+
+    <div class="content">
+        <div class="form-container"> <!-- Contêiner Flexbox para os formulários -->
+            <!-- Formulário de Login -->
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="mail"></ion-icon>
+                        </span>
+                        <input type="email" id="username" name="username" required>
+                        <label for="username">E-mail:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password" id="password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                    <div class="login-token">
+                        <p>
+                            login by <a href="#" class="token-link">Token</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulário de Login com Token -->
+            <div class="form-box login-token">
+                <h2>Login</h2>
+                <form action="{% url 'token_and_password_login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="key"></ion-icon>
+                        </span>
+                        <input id="token" name="token" required>
+                        <label for="token">Token:</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password" id="password_token" name="password" required>
+                        <label for="password_token">Password</label>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                    <div class="login-token">
+                        <p>
+                            login by <a href="#" class="email-link">E-mail</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal_loginCheckbox = document.getElementById('login_check');
+        const modal_login = document.querySelector('.modal_login');
+        const loginButton = document.querySelector('.login');
+    
+        // Função para alternar a visibilidade do modal de login
+        function toggleLoginModal() {
+            modal_loginCheckbox.checked = !modal_loginCheckbox.checked;
+            modal_login.classList.toggle('active');
+        }
+    
+        // Evento de clique no botão de login
+        loginButton.addEventListener('click', toggleLoginModal);
+    
+        // Evento de alteração do checkbox (opcional, dependendo do seu design)
+        modal_loginCheckbox.addEventListener('change', toggleLoginModal);
+    });
+</script>
