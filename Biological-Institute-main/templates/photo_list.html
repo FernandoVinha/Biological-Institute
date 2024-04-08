@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Lista de Fotos</h1>
+    <a href="{% url 'upload_photo' %}" class="btn btn-primary mb-3">Adicionar Foto</a>
+    <div class="row">
+        {% for photo in photos %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <img src="{{ photo.image.url }}" class="card-img-top" alt="Foto original">
+                    </div>
+                    <div class="col-md-6">
+                        {% if photo.processed_image %}
+                            <img src="{{ photo.processed_image.url }}" class="card-img-top" alt="Foto processada">
+                        {% else %}
+                            <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                                Ainda não processada
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Contagem: {{ photo.count_field }}</p>
+                    <p class="card-text">Data de Envio: {{ photo.upload_date|date:"d/m/Y H:i" }}</p>
+                    <form method="post" action="{% url 'update_count' photo.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="manual_count" value="{{ photo.manual_count }}" class="form-control mb-2" placeholder="Contagem manual">
+                        <button type="submit" class="btn btn-info btn-sm mb-2">Salvar Contagem</button>
+                    </form>
+                    <form method="post" action="{% url 'delete_photo' photo.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Nenhuma foto foi encontrada.</p>
+        {% endfor %}
+    </div>
+    <!-- Paginação aqui -->
+</div>
+{% endblock %}
+
+<!-- Scripts de paginação podem ser adicionados aqui -->
