@@ -9,6 +9,7 @@ echo "Criando e ativando o ambiente virtual..."
 python3 -m venv venv
 source venv/bin/activate
 
+
 # Instalar ngrok se não estiver instalado
 if ! command -v ngrok &> /dev/null
 then
@@ -22,7 +23,8 @@ fi
 # Instalar as dependências do projeto Django dentro do ambiente virtual
 echo "Instalando as dependências do projeto Django dentro do ambiente virtual..."
 pip install -r requirements.txt
-
+python manage.py makemigrations
+python manage.py migrate
 # Configurar o authtoken do ngrok
 echo "Configurando o authtoken do ngrok..."
 ngrok config add-authtoken 2emv4xRVSt3Jj3oTxkgq0BdRfDM_3SsdzXWCcf1Vj4az1qnFF
