@@ -26,7 +26,7 @@ echo "Criando script de inicialização..."
 echo "#!/bin/bash
 cd $PROJECT_DIR
 source venv/bin/activate
-python manage.py runserver 177.73.234.198:8000" > start_django.sh
+python manage.py runserver 177.73.234.214:8000" > start_django.sh
 #python manage.py runserver 177.73.234.198:88"
 	
 
